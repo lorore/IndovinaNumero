@@ -86,6 +86,7 @@ public class FXMLController {
     	this.layoutModalita.setDisable(false);
     	this.layoutTentativo.setDisable(true);
     	this.layoutAssistita.setDisable(true);
+    	this.model.setAssistita(false);
     	this.barTentativi.setProgress((1.0*this.model.getTentativiFatti())/this.model.getTMAX());
     	this.txtRisultato.setText("Scegliere la difficolta");
     	this.txtAssistita.clear();
@@ -164,14 +165,14 @@ public class FXMLController {
 			this.layoutAssistita.setDisable(true);
 			this.txtAssistita.clear();
     	}
-		else
+		else {
 			txtRisultato.setText("TENTATIVO TROPPO ALTO ");
     		if(this.model.isAssistita()) {
     		
     			this.txtAssistita.setText("Scegliere un numero tra: " + (this.model.gettB())+ " e " + (this.model.gettA()));
     		}
     	}
-    	
+    	}
     }
     
     
