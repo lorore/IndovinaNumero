@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -28,7 +29,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtTentativi" editable="false">
+                  <TextField fx:id="txtTentativi" editable="false" prefHeight="26.0" prefWidth="140.0">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -38,6 +39,44 @@
                   <Insets bottom="10.0" top="20.0" />
                </VBox.margin>
             </HBox>
+            <HBox fx:id="layoutModalita" disable="true" prefHeight="35.0" prefWidth="356.0">
+               <children>
+                  <Label text="Difficolta">
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="btnFacile" mnemonicParsing="false" onAction="#impostaFacile" text="Facile">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnMedio" mnemonicParsing="false" onAction="#impostaMedio" text="Medio">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnDifficile" mnemonicParsing="false" onAction="#impostaDifficile" text="Difficile">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox fx:id="layoutAssistita" disable="true" prefHeight="38.0" prefWidth="356.0">
+               <children>
+                  <Button fx:id="btnAssistita" mnemonicParsing="false" onAction="#handleAssistita" text="Modalita assistita">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="txtAssistita" editable="false" prefHeight="26.0" prefWidth="222.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
             <HBox fx:id="layoutTentativo" disable="true">
                <children>
                   <TextField fx:id="txtTentativoUtente">
@@ -46,10 +85,29 @@
                      </HBox.margin>
                   </TextField>
                   <Button fx:id="btnProva" mnemonicParsing="false" onAction="#doTentativo" text="Prova" />
+                  <Button fx:id="btnAbbandona" mnemonicParsing="false" onAction="#handleAbbandona" text="Abbandona">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="356.0">
+               <children>
+                  <Label text="Tentativi effettuati">
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ProgressBar fx:id="barTentativi" prefWidth="200.0" progress="0.0">
+                     <HBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </HBox.margin>
+                  </ProgressBar>
+               </children>
             </HBox>
          </children>
       </VBox>

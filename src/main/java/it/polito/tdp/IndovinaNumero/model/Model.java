@@ -6,11 +6,14 @@ import java.util.Set;
 
 public class Model {
 
-	private final int NMAX = 100;
-	private final int TMAX = 8;
+	private int NMAX;
+	private int TMAX;
 	private int segreto;
 	private int tentativiFatti;
 	private boolean inGioco = false;
+	private int tA;
+	private int tB;
+	private boolean assistita=false;
 	
 	private Set<Integer> tentativi;
 	
@@ -22,6 +25,46 @@ public class Model {
     	
     	this.tentativi=new HashSet<Integer>();
 	}
+	
+	
+	
+	public boolean isAssistita() {
+		return assistita;
+	}
+
+
+
+	public void setAssistita(boolean assistita) {
+		this.assistita = assistita;
+	}
+
+
+
+	public void setNMAX(int nMAX) {
+		NMAX = nMAX;
+		this.settA(nMAX);
+		this.settB(1);
+	}
+
+
+
+	public void settA(int tA) {
+		this.tA = tA;
+	}
+
+
+
+	public void settB(int tB) {
+		this.tB = tB;
+	}
+
+
+
+	public void setTMAX(int tMAX) {
+		TMAX = tMAX;
+	}
+
+
 
 	public int tentativo(int tentativo) {
 		//0 tentativo corretto
@@ -36,23 +79,29 @@ public class Model {
 		//controllo dell'input 
 		if(!this.tentativoValido(tentativo)) {
 			throw new InvalidParameterException("Devi inserire un numero tra 1 e "+NMAX
-					+" e non puoi inserire due volte lo stesso numero");
+					+"\n"+"e non puoi inserire due volte lo stesso numero");
 		}
 		
 		//il tentativo è valido
 		this.tentativiFatti++;
 		this.tentativi.add(tentativo);
-		if(this.tentativiFatti==(TMAX-1))
+		if(this.tentativiFatti==TMAX)
 			this.inGioco=false; //la partita è finita
 		
 		if(tentativo==this.segreto) {
 			this.inGioco=false; //la partita è finita
 			return 0;
 		}
-		else if(tentativo<this.segreto)
+		else if(tentativo<this.segreto) {
+			if(tentativo>=tB)
+				tB=tentativo+1;
 			return -1;
-		else
+		}
+		else {
+			if(tentativo<=tA)
+				tA=tentativo-1;
 			return 1;
+		}
 	}
 	
 	// perchè se voglio aggiungere un controllo domani, non
@@ -66,6 +115,10 @@ public class Model {
 			return true;
 	}
 	
+	public void abbandona() {
+		this.inGioco=false;
+	}
+	
 	public int getTMAX() {
 		return TMAX;
 	}
@@ -75,12 +128,37 @@ public class Model {
 	}
 
 	
+	
+	
+
+	public int gettA() {
+	/*if(tA!=this.NMAX)
+		return tA-1;
+		else*/
+			return tA;
+	}
+
+
+
+	public int gettB() {
+	/*	if(tB!=1)
+		return tB+1;
+		else*/
+			return tB;
+	}
+
+
 
 	public int getTentativiFatti() {
 		return tentativiFatti;
 	}
 
-	
+	public boolean maxTentativiRaggiunti() {
+		if(this.tentativiFatti==this.TMAX)
+			return true;
+		else
+			return false;
+	}
 
 	public int getNMAX() {
 		return NMAX;
